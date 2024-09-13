@@ -49,7 +49,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -57,14 +57,29 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
-    }
+        $data= $request->all();
+        $data['user_id']=1;
+        $post->update($data);
 
+        return redirect()->route('posts.index');
+    }
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        
+        return redirect()->route('posts.index');
+    }
+
+    public function addComment(Request $request, Post $post) {
+        $posts->comment()->attach($request['comment']);
+        return redirect('/posts/' . $post->id)->with('success', 'Comment added successfully!');
+    }
+    public function removeComment(Request $request, Post $post) {
+        $posts->comment()->detach($request['comment']);
+        return redirect('/posts/' . $post->id)->with('success', 'Comment removed successfully!');
     }
 }
