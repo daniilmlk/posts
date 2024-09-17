@@ -4,10 +4,11 @@
     <p>Content: {{ $post->content }}</p>
     <br>
     <ul>
-        @foreach([] as $comment)
+        @foreach($post->comments as $index => $comment)
         <li>
-        <p>Comment №{{$comment->id}}: {{ $comment->content }}</p>
+        <p>Comment #{{ $index + 1 }}: {{ $comment->content }}</p>
         </li>
+        <br>
         @endforeach
     </ul>
     <br>

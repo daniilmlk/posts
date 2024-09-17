@@ -10,7 +10,11 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', PostController::class);
-Route::resource('comments', CommentController::class);
+Route::get('comments/{post}/create', [CommentController::class, 'create'])->name('comments.create');
+Route::post('comments/{post}/store', [CommentController::class, 'store'])->name('comments.store');
+Route::get('comments/{post}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::post('comments/{post}/update', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('comments/{post}/destroy', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

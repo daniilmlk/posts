@@ -17,7 +17,7 @@
                     <input type="submit" value="Delete">
                 </form>
                 <br>
-                <a href="{{route('comments.create')}}">Add a comment</a>
+                <a href="{{route('comments.create', $post)}}">Add a comment</a>
                 <a href="{{route('posts.show', $post)}}">View Comments</a>
             </div>
         </li>

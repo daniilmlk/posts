@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class CommentController extends Controller
 {
-    public function create()
+    public function create(Post $post)
     {
-        return view('comment.create');
+        return view('comments.create', ['post' => $post]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
+        
         $data= $request->all();
-        $data['post_id']=1;
+        $data['post_id']=$post->id;
         $data['user_id']=1;
         Comment::create($data);
 
@@ -38,7 +40,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        return view('comment.edit', ['comment' => $comment]);
+        return view('comment.edit', ['comments' => $comment]);
     }
 
     /**
